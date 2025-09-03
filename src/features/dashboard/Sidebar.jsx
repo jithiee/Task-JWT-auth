@@ -12,10 +12,12 @@ const Sidebar = () => {
 
   return (
     <div className="w-20 bg-[#0f0f0f] h-screen flex flex-col items-center py-6 space-y-6">
+        {/* Logo +++ */}
+        <div className="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center font-bold text-white">V</div>
       {menuItems.map((item) => (
-        <div key={item.name} className="flex flex-col items-center text-gray-400 hover:text-white cursor-pointer">
+        <div key={item.name} className="flex flex-col items-center text-gray-400 hover:text-blue-200 cursor-pointer">
           <div className="text-2xl">{item.icon}</div>
-          <span className="text-xs mt-1">{item.name}</span>
+          <span className="text-xs mt-1 uppercase">{item.name}</span>
         </div>
       ))}
     </div>

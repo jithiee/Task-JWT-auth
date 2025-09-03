@@ -4,7 +4,6 @@ const Navbar = () => {
   return (
     <div className="flex justify-between items-center px-6 py-4 bg-[#0b0b0b] border-b border-gray-800">
       <div className="flex items-center gap-4">
-        <div className="w-8 h-8 bg-red-600 rounded-full flex items-center justify-center font-bold text-white">V</div>
         <span className="text-gray-400 uppercase text-sm tracking-wide">Dashboard / Overview</span>
       </div>
 
