@@ -42,9 +42,9 @@ const Login = () => {
       setTimeout(() => navigate("/userdashboard"), 1000);
     })
     .catch((err) => {
-      // if login fails
+      // If login fails
       setNotification({
-        message: err?.message || "Invalid email or password!",
+        message:  "Invalid email or password!" || err?.message,
         type: "error",
       });
     });
