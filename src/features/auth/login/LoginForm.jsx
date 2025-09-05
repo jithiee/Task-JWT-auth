@@ -44,7 +44,11 @@ const Login = () => {
     .catch((err) => {
       // If login fails
       setNotification({
-        message:  "Invalid email or password!" || err?.message,
+        message:
+          err?.message ||
+          err?.error ||
+          err?.errors?.[0] ||
+          "Invalid email or password!",
         type: "error",
       });
     });

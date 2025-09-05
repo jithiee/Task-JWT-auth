@@ -114,8 +114,17 @@ const authSlice = createSlice({
       })
       .addCase(loginUser.rejected, (state, action) => {
         state.loading = false;
-        state.error = action.payload;
+        let errorMsg =
+          action.payload?.message ||
+          action.payload?.error ||
+          action.payload?.errors?.[0] ||
+          "Login failed! Please check your credentials.";
+
+        state.error = { message: errorMsg };
       });
+
+
+      
   },
 });
 
