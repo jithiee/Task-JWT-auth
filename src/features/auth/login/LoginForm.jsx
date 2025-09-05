@@ -34,16 +34,21 @@ const Login = () => {
       return;
     }
 
-    dispatch(loginUser(formData))
-      .unwrap()
-      .then(() => {
-        setNotification({ message: "Login successful!", type: "success" });
-        setTimeout(() => navigate("/userdashboard"), 1000);
-      })
-      .catch(() => {
-        // error handled in useEffect above
+ 
+  dispatch(loginUser(formData))
+    .unwrap()
+    .then(() => {
+      setNotification({ message: "Login successful!", type: "success" });
+      setTimeout(() => navigate("/userdashboard"), 1000);
+    })
+    .catch((err) => {
+      // Show error directly if login fails
+      setNotification({
+        message: err?.message || "Invalid email or password!",
+        type: "error",
       });
-  };
+    });
+};
 
   return (
     <div className="min-h-screen flex bg-black text-white">
