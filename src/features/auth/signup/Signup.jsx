@@ -28,7 +28,7 @@ const Signup = () => {
     // Show error notification when redux error updates
     useEffect(() => {
         if (error) {
-            setNotification({ message: error.message || "Signup failed!", type: "error" });
+            setNotification({ message: error.message || "Signup failed! Try again", type: "error" });
             setTimeout(() => setNotification({ message: "", type: "" }), 4000);
         }
     }, [error]);
@@ -64,11 +64,20 @@ const Signup = () => {
                     navigate("/login");
                 }, 2000);
             })
-            .catch(() => { });
-        // errors handled by useEffect
+            .catch(() => {
+            setNotification({
+                message:
+                err?.message ||
+                err?.error ||
+                err?.errors?.[0] ||
+                "Signup faild! Try again",
+                type: "error",
+            });
+        });
+        
     };
 
-    const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
+    // const label = { inputProps: { 'aria-label': 'Checkbox demo' } };
 
     return (
         <div className="min-h-screen flex bg-black text-white">

@@ -1,12 +1,14 @@
 import { createSlice, createAsyncThunk } from "@reduxjs/toolkit";
 
+const BASE_URL = process.env.REACT_APP_API_BASE_URL;
+
 //-------------------- Signup --------------------
 export const signupUser = createAsyncThunk(
   "auth/signupUser",
   async (userData, { rejectWithValue }) => {
     try {
       const res = await fetch(
-        "https://Integrite.dev/falcon/public/test/auth/signup",
+        `${BASE_URL}/auth/signup`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -15,7 +17,7 @@ export const signupUser = createAsyncThunk(
       );
 
       const data = await res.json();
-    //   console.log("dataa ", data);
+    //   console.log("dataa", data);
 
       if (!res.ok) return rejectWithValue(data);
       return data;
@@ -31,7 +33,7 @@ export const loginUser = createAsyncThunk(
   async (credentials, { rejectWithValue }) => {
     try {
       const res = await fetch(
-        "https://Integrite.dev/falcon/public/test/auth/login",
+        `${BASE_URL}/auth/login`,
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -45,12 +47,7 @@ export const loginUser = createAsyncThunk(
       if (!res.ok) return rejectWithValue(data);
 
          // Check different token keys for set into Localstorage 
-      const token =
-        data.token ||
-        data.access_token ||
-        data.jwt ||
-        data.data?.token ||
-        null;
+      const token = data.token || data.access_token || data.jwt || data.data?.token || null;
       
       //Check token   
     //   if (token) {
@@ -58,7 +55,7 @@ export const loginUser = createAsyncThunk(
         
         //  localStorage.setItem("token", token);
     //   } else {
-    //     console.log("No token found in login response:", data);
+    //     console.log("no token found in login response:", data);
     //   }
 
        localStorage.setItem("token", token);
@@ -123,13 +120,38 @@ const authSlice = createSlice({
         state.error = { message: errorMsg };
       });
 
-
-      
   },
 });
 
 export const { logout } = authSlice.actions;
 export default authSlice.reducer;
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 
